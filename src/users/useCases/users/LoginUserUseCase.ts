@@ -1,5 +1,3 @@
-import normalizeEmail from 'normalize-email';
-
 import IUserModel from '../../model/IUserModel';
 import UserRepository from '../../repository/UserRepository';
 import InvalidCredentials from '../errors/InvalidCredentials';
@@ -16,9 +14,8 @@ export default class LoginUserUseCase {
 
   async exec(email: string, password: string): Promise<Object> {
     const userRepository = new UserRepository();
-    const newEmail = normalizeEmail(email);
+    const newEmail = email.toLowerCase();
     const foundUser = await userRepository.findOne({email: newEmail});
-
     if (!foundUser) throw new UserNotFoundError();
     await this.isPasswordValid(password, foundUser);
 

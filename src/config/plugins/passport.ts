@@ -7,10 +7,12 @@ const LocalStrategy = require('passport-local').Strategy;
  passport.use(
   new LocalStrategy(
     {
-      usernameField: 'email',
-      passwordField: 'password'
+      usernameField: 'user[email]',
+      passwordField: 'user[password]'
     },
     (username, password, done) => {
+      console.log('username', username);
+      console.log('password', password);
       const loginUserUseCase = new LoginUserUseCase();
       loginUserUseCase
         .exec(username, password)
