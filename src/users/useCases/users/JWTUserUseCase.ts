@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import IUserLogged from '../../model/interfaces/IUserLogged';
 
-const DAYS = 60;
+const DAYS = 30;
 const SCALE = 1000;
 const BASE = 10;
 
@@ -18,8 +18,8 @@ export default class JWTUserUseCase {
   generateJWT(user: IUserModel, days: number = DAYS): Object {
     const expirationDate = this.generateExpirationDate(days);
     const { JWT_SECRET } = process.env;
-    const { _id: id, email, firstName, lastName, client } = user;
-    const { _id: clientId } = client as any;
+    const { _id: id, email, firstName, lastName, company } = user;
+    const { _id: companyId } = company as any;
     const uid = uuidv4();
 
     return jwt.sign(
@@ -29,7 +29,7 @@ export default class JWTUserUseCase {
         exp: expirationDate,
         validator: {
           id,
-          client: clientId,
+          company: companyId,
           email,
           firstName,
           lastName
@@ -46,8 +46,9 @@ export default class JWTUserUseCase {
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
-      client: user.client,
-      bearer: this.generateJWT(user)
+      company: user.company,
+      role: user.role,
+      token: this.generateJWT(user)
     };
   }
 

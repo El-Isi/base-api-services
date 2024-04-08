@@ -1,11 +1,15 @@
 interface IUser {
   email: string;
   firstName: string;
+  secondName?: string;
   lastName: string;
-  client: string;
+  secondLastName: string;
+  company: string;
   phone: string;
   password: string;
-  socketId?: string;
+  role: string;
+  active: boolean;
+  normalizedFullName: string;
 }
 
 export default IUser;

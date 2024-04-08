@@ -3,8 +3,9 @@ interface IUserLogged {
   email: string;
   firstName: string;
   lastName: string;
-  client: string;
-  bearer: any;
+  company: string;
+  role: any;
+  token: any;
 }
 
 export default IUserLogged;
