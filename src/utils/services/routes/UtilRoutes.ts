@@ -12,6 +12,13 @@ const routes: IRoute[] = [
       userController.sendWhatsapp
     ],
   },
+  {
+    path: URL_BASE + "/openAI",
+    method: "post",
+    handler: [
+      userController.openAi
+    ],
+  },
 ];
 
 export default routes;
