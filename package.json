@@ -6,9 +6,10 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "dev": "redis-server & tsc-watch --onSuccess \"node ./dist/server.js\"",
-    "copy-wallet-files": "cp -a ./src/utils/ticketGenerator/IOS/certificates/* ./dist/utils/ticketGenerator/IOS/certificates/ && cp -a ./src/utils/ticketGenerator/IOS/model/boardingPass.pass/* ./dist/utils/ticketGenerator/IOS/model/boardingPass.pass/",
-    "copy-templates": "cp -a ./src/utils/templates/email/* ./dist/utils/templates/",
-    "postinstall": "npx tsc && npm run copy-templates && npm run copy-wallet-files",
+    "copy-wallet-certificates": "mkdir -p ./dist/utils/templates/email && cp -a ./src/utils/ticketGenerator/IOS/certificates/. ./dist/utils/ticketGenerator/IOS/certificates",
+    "copy-wallet-pass": "mkdir -p ./dist/utils/ticketGenerator/IOS/model/boardingPass.pass && cp -a ./src/utils/ticketGenerator/IOS/model/boardingPass.pass/. ./dist/utils/ticketGenerator/IOS/model/boardingPass.pass",
+    "copy-templates": "mkdir -p ./dist/utils/templates/email && cp -a ./src/utils/templates/email/. ./dist/utils/templates/email",
+    "postinstall": "npx tsc && npm run copy-templates && npm run copy-wallet-certificates && npm run copy-wallet-pass",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "El Isi Hechicero Supremo",
@@ -42,6 +43,7 @@
     "mongoose-autopopulate": "^1.1.0",
     "morgan": "^1.10.0",
     "normalize-email": "^1.1.1",
+    "openai": "^4.33.0",
     "passkit-generator": "^3.1.11",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
