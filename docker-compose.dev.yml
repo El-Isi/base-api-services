@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build
+    environment:
+      NODE_ENV: development
+    command: pnpm run dev
+    volumes:
+      - ./src:/app/src
+      - ./tsconfig.json:/app/tsconfig.json
+      - app-dist:/app/dist
+
+volumes:
+  app-dist:
